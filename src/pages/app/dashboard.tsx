@@ -4,10 +4,9 @@ export function Dashboard() {
     return (
         <>
             <Helmet
-                title="Dashboard">
+                title="Dashboard" />
                 <h1>Dashboard</h1>
                 <p>Find me in src/pages/app/dashboard.tsx</p>
-            </Helmet>
         </>
     );
 }

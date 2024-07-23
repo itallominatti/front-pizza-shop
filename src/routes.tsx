@@ -5,16 +5,15 @@ import { SignIn } from "./pages/auth/sign-in";
 import { AppLayout } from "./pages/_layouts/app";
 import { AuthLayout } from "./pages/_layouts/auth";
 
-export const router = createBrowserRouter([
+export const router: any = createBrowserRouter([
     {
         path: "/",
         element: <AppLayout />,
-        children: [{ path: "/", element: <Dashboard /> }]
+        children: [{ path: "", element: <Dashboard /> }] 
     },
-
     {
         path: "/sign-in",
         element: <AuthLayout />,
-        children: [{ path: "/", element: <SignIn /> }]
+        children: [{ path: "", element: <SignIn /> }] 
     }
-])
+]);

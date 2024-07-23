@@ -13,6 +13,9 @@ importers:
 
   .:
     dependencies:
+      '@hookform/resolvers':
+        specifier: ^3.9.0
+        version: 3.9.0(react-hook-form@7.52.1(react@18.3.1))
       '@radix-ui/react-slot':
         specifier: ^1.1.0
         version: 1.1.0(@types/react@18.3.3)(react@18.3.1)
@@ -40,6 +43,9 @@ importers:
       react-helmet-async:
         specifier: ^2.0.5
         version: 2.0.5(react@18.3.1)
+      react-hook-form:
+        specifier: ^7.52.1
+        version: 7.52.1(react@18.3.1)
       react-router-dom:
         specifier: ^6.25.1
         version: 6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -52,6 +58,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.6)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@rocketseat/eslint-config':
         specifier: ^2.2.2
@@ -379,6 +388,11 @@ packages:
   '@eslint/object-schema@2.1.4':
     resolution: {integrity: sha512-BsWiH1yFGjXXS2yvrf5LyuoSIIbPrGUWob917o+BTKuZ7qJdxX8aJLRxs1fS9n6r7vESrq1OUqb68dANcFXuQQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@hookform/resolvers@3.9.0':
+    resolution: {integrity: sha512-bU0Gr4EepJ/EQsH/IwEzYLsT/PEj5C0ynLQ4m+GSHS+xKH4TfSelhluTgOaoc4kA5s7eCsQbM4wvZLzELmWzUg==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -1792,6 +1806,12 @@ packages:
     peerDependencies:
       react: ^16.6.0 || ^17.0.0 || ^18.0.0
 
+  react-hook-form@7.52.1:
+    resolution: {integrity: sha512-uNKIhaoICJ5KQALYZ4TOaOLElyM+xipord+Ha3crEFhTntdLvWZqVY49Wqd/0GiVCA/f9NjemLeiNPjG7Hpurg==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -2157,6 +2177,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
@@ -2416,6 +2439,10 @@ snapshots:
   '@eslint/js@9.7.0': {}
 
   '@eslint/object-schema@2.1.4': {}
+
+  '@hookform/resolvers@3.9.0(react-hook-form@7.52.1(react@18.3.1))':
+    dependencies:
+      react-hook-form: 7.52.1(react@18.3.1)
 
   '@humanwhocodes/module-importer@1.0.1': {}
 
@@ -3945,6 +3972,10 @@ snapshots:
       react-fast-compare: 3.2.2
       shallowequal: 1.1.0
 
+  react-hook-form@7.52.1(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
   react-is@16.13.1: {}
 
   react-refresh@0.14.2: {}
@@ -4392,3 +4423,5 @@ snapshots:
   yaml@2.4.5: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@3.23.8: {}
