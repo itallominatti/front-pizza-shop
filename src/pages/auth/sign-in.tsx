@@ -1,14 +1,47 @@
-import { Button } from "@/Components/button";
 import { Helmet } from "react-helmet-async";
+import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { z } from 'zod'
+import { toast } from 'sonner'
+
+
+import { Button } from "@/Components/button";
 import { Label } from '@/Components/label'
 import { Input } from '@/Components/input'
+import { resolve } from "path";
 
+
+const signInForm = z.object({
+    email: z.string().email(),
+})
+
+type SignInForm = z.infer<typeof signInForm>
 
 export function SignIn() {
+
+    const { register, handleSubmit, formState: { isSubmitting } } = useForm<SignInForm>()
+
+    async function handleSignIn(data: SignInForm) {
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 2000))
+            console.log(data);
+
+            toast.success('Login efetuado com sucesso!')
+        } catch {
+            toast.error('Erro ao efetuar login!')
+        }
+    }
+
     return (
         <>
             <Helmet title="Login" />
             <div className="p-8">
+                <Button variant="ghost" asChild className="absolute right-8 top-8">
+                    <Link to="/sign-up" className="">
+                        Novo estabelecimento
+                    </Link>
+                </Button>
+
                 <div className="flex w-[350px] flex-col justify-center gap-6">
 
                     <div className="flex flex-col gap-2 text-center">
@@ -16,12 +49,18 @@ export function SignIn() {
                         <p className="text-sm text-muted-foreground">acompanhe suas vendas pelo painel do parceiro</p>
                     </div>
 
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handleSubmit(handleSignIn)}>
                         <div className="space-y-2">
                             <Label htmlFor="email">Seu e-mail</Label>
-                            <Input type="email" id="email" placeholder="Digite seu e-mail" />
+                            <Input type="email" id="email" placeholder="Digite seu e-mail" {...register('email')} />
                         </div>
-                        <Button type="submit">Acessar painel</Button>
+                        <Button
+                            className="w-full"
+                            disabled={isSubmitting}
+                            type="submit"
+                        >
+                            Acessar painel
+                        </Button>
                     </form>
                 </div>
             </div>
