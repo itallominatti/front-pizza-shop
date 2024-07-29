@@ -8,6 +8,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from "@/Components/button";
 import { Label } from '@/Components/label'
 import { Input } from '@/Components/input'
+import { RegisterRestaurant } from "@/api/register-restaurant";
+import { useMutation } from "@tanstack/react-query";
 
 
 
@@ -25,20 +27,29 @@ export function SignUp() {
 
     const { register, handleSubmit, formState: { isSubmitting } } = useForm<signUpForm>()
 
-    async function handlesignUp(data: signUpForm) {
-       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000))
-        console.log(data);
+    const { mutateAsync: registerRestaurantFn } = useMutation({
+        mutationFn: RegisterRestaurant,
+    })
 
-        toast.success('Cadastro efetuado com sucesso!', {
-            action: {
-                label: 'Login',
-                onClick: () => navigate('/sign-in')
-            }
-        })
-       } catch {
-        toast.error('Erro ao efetuar cadastro!')
-       }
+    async function handlesignUp(data: signUpForm) {
+        try {
+            await registerRestaurantFn({
+                restaurantName: data.restaurantName,
+                managerName: data.managerName,
+                email: data.email,
+                phone: data.phone
+            })
+            console.log(data);
+
+            toast.success('Cadastro efetuado com sucesso!', {
+                action: {
+                    label: 'Login',
+                    onClick: () => navigate(`/sign-in?email=${data.email}`)
+                }
+            })
+        } catch {
+            toast.error('Erro ao efetuar cadastro!')
+        }
     }
 
     return (
@@ -60,12 +71,12 @@ export function SignUp() {
                     <form className="space-y-4" onSubmit={handleSubmit(handlesignUp)}>
                         <div className="space-y-2">
                             <Label htmlFor="restaurant">Nome do estabelecimento</Label>
-                            <Input type="text" id="restaurant" placeholder="Digite seu e-mail" {...register('restaurantName')} />
+                            <Input type="text" id="restaurant" placeholder="Digite o nome do seu restaurante" {...register('restaurantName')} />
                         </div>
 
                         <div className="space-y-2">
                             <Label htmlFor="managerName">Seu nome</Label>
-                            <Input type="text" id="managerName" placeholder="Digite seu e-mail" {...register('managerName')} />
+                            <Input type="text" id="managerName" placeholder="Digite seu nome" {...register('managerName')} />
                         </div>
 
                         <div className="space-y-2">
@@ -75,7 +86,7 @@ export function SignUp() {
 
                         <div className="space-y-2">
                             <Label htmlFor="phone">Seu celular</Label>
-                            <Input type="tel" id="phone" placeholder="Digite seu e-mail" {...register('phone')} />
+                            <Input type="tel" id="phone" placeholder="Digite seu celular" {...register('phone')} />
                         </div>
 
                         <Button
