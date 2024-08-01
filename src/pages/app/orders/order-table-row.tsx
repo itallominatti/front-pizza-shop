@@ -4,11 +4,24 @@ import { Button } from "@/Components/button"
 import { ArrowRight, Search, X } from "lucide-react"
 import { Dialog, DialogTrigger } from "@/Components/dialog"
 import { OrderDetails } from "./order-details"
+import { statusType } from "@/api/get-orders"
+import { OrderStatus } from "@/Components/order-status"
+import { ptBR } from 'date-fns/locale'
+
+import { formatDistanceToNow } from 'date-fns'
 
 
-//export interface OrderTableRowProps {}
+export interface OrderTableRowProps {
+    order: {
+        orderId: string
+        createdAt: string
+        status: statusType
+        customerName: string
+        total: number
+    }
+}
 
-export function OrderTableRow() {
+export function OrderTableRow({ order }: OrderTableRowProps) {
 
     return (
         <TableRow>
@@ -24,16 +37,19 @@ export function OrderTableRow() {
                     <OrderDetails />
                 </Dialog>
             </TableCell>
-            <TableCell className="font-mono text-xs font-medium">123456</TableCell>
-            <TableCell className="text-muted-foreground">há 1 hora</TableCell>
+            <TableCell className="font-mono text-xs font-medium">{order.orderId}</TableCell>
+            <TableCell className="text-muted-foreground">{formatDistanceToNow(order.createdAt, {
+                locale: ptBR,
+                addSuffix: true
+            })}</TableCell>
             <TableCell className="">
-                <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-slate-400" />
-                    <span className="font-medium text-muted-foreground">Pendente</span>
-                </div>
+                <OrderStatus status={order.status} />
             </TableCell>
-            <TableCell className="font-medium">Itallo Minatti</TableCell>
-            <TableCell className="font-medium">R$ 50,00</TableCell>
+            <TableCell className="font-medium">{order.customerName}</TableCell>
+            <TableCell className="font-medium">{order.total.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            })}</TableCell>
             <TableCell>
                 <Button variant={'outline'} size={'xs'}>
                     <ArrowRight className="h-3 w-3 mr-2" />
